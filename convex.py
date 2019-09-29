@@ -17,7 +17,7 @@ count = 0
 # outputs : = pointList = list of all points genereated
 def getData():
     dataFile = open("data.txt", "r")
-    pointList = []
+    
     numOfPoints = int(dataFile.readline().rstrip())
     
     while numOfPoints > 0:
@@ -25,7 +25,7 @@ def getData():
         point = stringPoint.split(" ")
         point[0] = int(point[0])
         point[1] = int(point[1])
-        pointList.append(point)
+        points.append(point)
         numOfPoints = numOfPoints - 1
 
     dataFile.close()
@@ -33,7 +33,7 @@ def getData():
     
 
  
-    return pointList
+    
 
 
 
@@ -43,10 +43,8 @@ def getData():
 # points that are generated are between the range of 0 and 100
 #
 # inputs : n = length of list.
-#
-# outputs : pointList = list of all points genereated
 def createData(n):
-    pointList = []
+    
     gate = n
     while gate > 0:
         point = []
@@ -55,26 +53,36 @@ def createData(n):
         y = random.randint(0, 100)
         point.append(y)
         copy = False
-        for items in pointList:
+        for items in points:
             if items[0] == x and items[1] == y:
                 copy = True
         if copy == False:
-            pointList.append(point)
+            points.append(point)
             gate = gate - 1
 
     
               
-    return pointList
+ 
         
-                
+#
+#
+# output : points = 
+def getConvexHull();
+
+
+
+
+
+
+
 
 
 
 # main method, calls the other methods
 def main():
     
-    pointList = getData()
-    print(pointList)
+    getData()
+    print(points)
 
 
 
