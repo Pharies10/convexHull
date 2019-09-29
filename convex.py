@@ -53,15 +53,15 @@ def createData(n):
     gate = n
     while gate > 0:
         point = []
-        x = random.randint(0, 2)
+        x = random.randint(0, 5)
         point.append(x)
-        y = random.randint(0, 2)
+        y = random.randint(0, 5)
         point.append(y)
         copy = False
         for items in points:
             if items[0] == x and items[1] == y:
                 copy = True
-                print("worked")
+               
         if copy == False:
             points.append(point)
             gate = gate - 1
@@ -87,6 +87,7 @@ def getConvexHull():
     convexList = []
     convexList.append(firstItem)
     found = False
+    notHull = True
     prevPoint = firstItem
     firstRun = 0
     while found == False:
@@ -96,8 +97,8 @@ def getConvexHull():
             pointsCount = len(points) - 1
             
             while nextPoint == False and pointsCount >= 0:
+                
                 testPoint = points[pointsCount]
-                print(convexList)
     
                 if testPoint not in convexList:                        
                     nextPoint = checkLineSegment(point, testPoint)
@@ -107,20 +108,29 @@ def getConvexHull():
   
                 if nextPoint == False and checkLineSegment(point, convexList[0]) == True:
                         found = True
+                        notHull = False
+                        
                         
                 elif nextPoint == True:
                     convexList.append(testPoint)
                     
                 else:   
-                    found = False
+                    found = True
                     
                    
             
             prevPoint = point
             firstRun = 1
+        
+        
             
-
-    return convexList
+    if notHull == False:
+        return convexList
+    else:
+        answer = "there is no convex hull"
+        print(convexList)
+        return answer
+    
                     
 
 # checks if all the points of points lie on one side of the line or not
@@ -187,7 +197,7 @@ def main():
     global count
     global points
   
-    getData()
+    createData(10)
    
     convexList = getConvexHull()
     
