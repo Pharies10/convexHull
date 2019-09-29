@@ -66,12 +66,34 @@ def createData(n):
         
 #
 #
-# output : points = 
-def getConvexHull();
+# output : convexList = points in a convex hull, no repeates
+def getConvexHull():
+    firstItem = points[0]
+    xLow = firstItem[0]
+    convexList = []
+
+    # since we know the an extreme must be the lowest x value, we start by finding the smallest x value
+    for item in points:
+        if item[0] < xLow:
+            xLow = item[0]
+
+    
+    convexList.append(xLow)
+    found = False
+    indexCon = 0
+    indexCheck = 0
+    currentPoint = convexList[indexCon]
+    currentCheck = points[indexCheck]
+    while found == False:
+        for point in convexList:
+            print(convexList)
+            for testPoint in points:
+                
 
 
 
-
+                #if point[0] =! testPoint[0] and point[1] =! testPoint[1] 
+    
 
 
 
@@ -82,8 +104,8 @@ def getConvexHull();
 def main():
     
     getData()
-    print(points)
-
+    getConvexHull()
+    
 
 
 
