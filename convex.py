@@ -53,9 +53,9 @@ def createData(n):
     gate = n
     while gate > 0:
         point = []
-        x = random.randint(0, 5)
+        x = random.randint(0, 100)
         point.append(x)
-        y = random.randint(0, 5)
+        y = random.randint(0, 100)
         point.append(y)
         copy = False
         for items in points:
@@ -196,14 +196,16 @@ def findLine(index1, index2):
 def main():
     global count
     global points
-  
-    createData(10)
-   
-    convexList = getConvexHull()
     
-    print(points)
-    print(convexList)
-    print(count)
+    createData(90)
+    print("points genereated", points)
+    convexList = getConvexHull()
+
+    print("size of convex hull is: " ,len(convexList))
+    
+    print("convex list is:", convexList)
+    
+    print("number of nodes checked is", count)
 
 
 
