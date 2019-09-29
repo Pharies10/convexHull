@@ -9,8 +9,8 @@ import random
 # global vars
 points = []
 count = 0
-found = False
-convexList = []
+
+
 
 
 # opens file called data.txt and creates a global list of points
@@ -19,6 +19,7 @@ convexList = []
 #
 # outputs : = pointList = list of all points genereated
 def getData():
+    global points
     dataFile = open("data.txt", "r")
     
     numOfPoints = int(dataFile.readline().rstrip())
@@ -47,18 +48,20 @@ def getData():
 #
 # param : n = length of list.
 def createData(n):
+    global points
     
     gate = n
     while gate > 0:
         point = []
-        x = random.randint(0, 100)
+        x = random.randint(0, 2)
         point.append(x)
-        y = random.randint(0, 100)
+        y = random.randint(0, 2)
         point.append(y)
         copy = False
         for items in points:
             if items[0] == x and items[1] == y:
                 copy = True
+                print("worked")
         if copy == False:
             points.append(point)
             gate = gate - 1
@@ -74,28 +77,55 @@ def getConvexHull():
     firstItem = points[0]
     xLow = firstItem[0]
     
+    
 
     # since we know the an extreme must be the lowest x value, we start by finding the smallest x value
     for item in points:
         if item[0] < xLow:
             xLow = item[0]
-
-    
-    convexList.append(xLow)
-    
-  
+            firstItem = item
+    convexList = []
+    convexList.append(firstItem)
+    found = False
+    prevPoint = firstItem
+    firstRun = 0
     while found == False:
-  
+        
         for point in convexList:
             nextPoint = False
-            pointsCount = points.length()
+            
+            pointsCount = len(points) - 1
+            
+           
             while nextPoint == False and pointsCount >= 0:
-                testPoint = points[pointsCount]
-                if point[0] =! testPoint[0] and point[1] =! testPoint[1]:
-                    nextPoint = checkLineSegment(point, testPoint)
-            if nextPoint == True:
-                convexList.append(testPoint)
                 
+                testPoint = points[pointsCount]
+                print(convexList)
+                
+                if testPoint not in convexList:
+                         
+                    nextPoint = checkLineSegment(point, testPoint)
+                pointsCount = pointsCount - 1
+            
+
+            if  firstRun > 0:
+  
+                if nextPoint == False and checkLineSegment(point, convexList[0]) == True:
+                        found = True
+                        
+                elif nextPoint == True:
+                    convexList.append(testPoint)
+                    
+                else:   
+
+                    found = False
+                    
+                   
+            
+            prevPoint = point
+            firstRun = 1
+            
+
     return convexList
                     
 
@@ -106,9 +136,26 @@ def getConvexHull():
 # output : True if all the points lie on one side
 #          False if the points do not all lie on same side
 def checkLineSegment(index1, index2):
-    a, b, c = findLine()
-
+    global count
+    a, b, c = findLine(index1, index2)
+    gate = False
+    over = False
+    under = False
     for items in points:
+        if over == True and under == True:
+            return gate 
+        else:
+            check = (a * items[0]) + (b * items[1])
+            
+            if check >= c:
+                over = True
+            else:
+                under = True
+        
+        count = count + 1
+    gate = True
+    return gate
+    
         
     
 
@@ -142,12 +189,16 @@ def findLine(index1, index2):
 
 # main method, calls the other methods
 def main():
-    
+    global count
+    global points
+  
     getData()
-    getConvexHull()
+   
+    convexList = getConvexHull()
     
-
-
+    print(points)
+    print(convexList)
+    print(count)
 
 
 
