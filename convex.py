@@ -70,7 +70,7 @@ def createData(n):
               
  
         
-#
+# tests each point to find the points that fit in a convex hull
 #
 # output : convexList = points in a convex hull, no repeates
 def getConvexHull():
@@ -93,21 +93,16 @@ def getConvexHull():
         
         for point in convexList:
             nextPoint = False
-            
             pointsCount = len(points) - 1
             
-           
             while nextPoint == False and pointsCount >= 0:
-                
                 testPoint = points[pointsCount]
                 print(convexList)
-                
-                if testPoint not in convexList:
-                         
+    
+                if testPoint not in convexList:                        
                     nextPoint = checkLineSegment(point, testPoint)
                 pointsCount = pointsCount - 1
-            
-
+        
             if  firstRun > 0:
   
                 if nextPoint == False and checkLineSegment(point, convexList[0]) == True:
@@ -117,7 +112,6 @@ def getConvexHull():
                     convexList.append(testPoint)
                     
                 else:   
-
                     found = False
                     
                    
@@ -145,14 +139,15 @@ def checkLineSegment(index1, index2):
         if over == True and under == True:
             return gate 
         else:
-            check = (a * items[0]) + (b * items[1])
-            
-            if check >= c:
-                over = True
-            else:
-                under = True
+            if items != index1 or items != index2:
+               check = (a * items[0]) + (b * items[1])
+               count = count + 1
+               if check > c:
+                    over = True
+               else:
+                    under = True
         
-        count = count + 1
+        
     gate = True
     return gate
     
