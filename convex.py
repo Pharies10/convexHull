@@ -88,8 +88,8 @@ def getConvexHull():
     convexList.append(firstItem)
     found = False
     notHull = True
-    prevPoint = firstItem
-    firstRun = 0
+
+   
     while found == False:
         
         for point in convexList:
@@ -104,23 +104,22 @@ def getConvexHull():
                     nextPoint = checkLineSegment(point, testPoint)
                 pointsCount = pointsCount - 1
         
-            if  firstRun > 0:
+           
   
-                if nextPoint == False and checkLineSegment(point, convexList[0]) == True:
-                        found = True
-                        notHull = False
-                        
-                        
-                elif nextPoint == True:
-                    convexList.append(testPoint)
-                    
-                else:   
+            if nextPoint == False and checkLineSegment(point, convexList[0]) == True:
                     found = True
+                    notHull = False
+                        
+                        
+            elif nextPoint == True:
+                convexList.append(testPoint)
+                    
+            else:   
+                found = True
                     
                    
+           
             
-            prevPoint = point
-            firstRun = 1
         
         
             
@@ -141,22 +140,26 @@ def getConvexHull():
 #          False if the points do not all lie on same side
 def checkLineSegment(index1, index2):
     global count
+    global points
     a, b, c = findLine(index1, index2)
     gate = False
+    middle = False
     over = False
     under = False
     for items in points:
         if over == True and under == True:
             return gate 
         else:
-            if items != index1 or items != index2:
+            if items != index1 and items != index2: 
                check = (a * items[0]) + (b * items[1])
                count = count + 1
                if check > c:
                     over = True
-               else:
+               elif check < c:
                     under = True
-        
+                
+               else:
+                   middle = True
         
     gate = True
     return gate
@@ -197,7 +200,8 @@ def main():
     global count
     global points
     
-    createData(90)
+    getData()
+
     print("points genereated", points)
     convexList = getConvexHull()
 
