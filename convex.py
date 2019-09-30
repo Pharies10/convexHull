@@ -146,16 +146,12 @@ def checkLineSegment(index1, index2):
     middle = False
     over = False
     under = False
-    print(index1, index2)
+   
     for items in points:
         
-        
-   
         if items != index1 and items != index2: 
            check = (a * items[0]) + (b * items[1])
            count = count + 1
-           print(items)
-           
            
            if check > c:
                 over = True
@@ -164,8 +160,7 @@ def checkLineSegment(index1, index2):
             
            else:
                middle = True
-           print(over, under,middle)
-
+          
         if over == True and under == True:
             return gate
         
