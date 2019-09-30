@@ -43,7 +43,7 @@ def getData():
 
 
 
-# creates a list of psuedo-randomly generated pojnts of length n
+# creates a list of psuedo-randomly generated points of length n
 # points that are generated are between the range of 0 and 100
 #
 # param : n = length of list.
@@ -72,7 +72,7 @@ def createData(n):
         
 # tests each point to find the points that fit in a convex hull
 #
-# output : convexList = points in a convex hull, no repeates
+# output : convexList = points in a convex hull, with no repeates
 def getConvexHull():
     firstItem = points[0]
     xLow = firstItem[0]
