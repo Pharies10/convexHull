@@ -45,6 +45,7 @@ def getData():
 
 # creates a list of psuedo-randomly generated points of length n
 # points that are generated are between the range of 0 and 100
+# is the number of points in the list are greater then the number of points being radnomly picked from then change the random points to a higher number
 #
 # param : n = length of list.
 def createData(n):
@@ -202,8 +203,12 @@ def findLine(index1, index2):
 def main():
     global count
     global points
-    
+
+
     getData()
+
+    #uncomment this for a randomly generated list
+    #createData(10)
 
     print("points genereated", points)
     convexList = getConvexHull()
